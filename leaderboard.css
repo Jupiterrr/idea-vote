@@ -1,0 +1,275 @@
+body {
+    /*font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;*/
+    font-family:arial,sans-serif;
+    font-weight: 200;
+    margin: 50px 0;
+    padding: 0;
+}
+
+#outer {
+    width: 600px;
+    margin: 0 auto;
+}
+
+.player {
+    cursor: pointer;
+    padding: 5px;
+}
+
+.player .name {
+    display: inline-block;
+    width: 300px;
+    font-size: 1.75em;
+}
+
+.player .score {
+    display: inline-block;
+    width: 100px;
+    text-align: right;
+    font-size: 2em;
+    font-weight: bold;
+    color: #777;
+}
+
+.player.selected {
+    background-color: yellow;
+}
+
+.player.selected .score {
+    color: black;
+}
+
+.details, .none {
+    font-weight: bold;
+    font-size: 2em;
+    border-style: dashed none none none;
+    border-color: #ccc;
+    border-width: 4px;
+    margin: 50px 10px;
+    padding: 10px 0px;
+}
+
+.none {
+    color: #777;
+}
+
+.inc {
+  cursor: pointer;
+}
+
+
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:hover {
+  color: #4078C0;
+}
+
+.input-section h2 {
+  font-size: 18px;
+  font-weight: bold;
+  padding-bottom: 10px;
+  margin: 0;
+}
+
+.input-section .new-idea-input,
+.input-section textarea { box-sizing: border-box; }
+
+.input-section .new-idea-input, textarea {
+  -webkit-appearance: none;
+  appearance: none;
+  background: none;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  display: block;
+  font: inherit;
+  line-height: 1em;
+  margin: 0;
+  outline: none;
+  padding: 0;
+  position: relative;
+  resize: none;
+  width: 100%;
+  border: 1px solid #8F9BB3;
+  border-radius: 2px;
+  padding: 9px;
+  margin-bottom: 10px;
+}
+
+.input-section textarea {
+  font-size: 10pt;
+}
+
+.input-section .fadein-area {
+  display: none;
+}
+
+.input-section.active .fadein-area {
+  display: block;
+}
+
+.filterbar {
+  margin-bottom: 10px;
+}
+
+.filterbar > .filter-link, .filterbar > select {
+  margin-right: .5em;
+}
+
+.filter-link {
+  font-size: 8pt;
+  display: inline-block;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  padding: .2em .5em;
+}
+
+
+ul.suggestion-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.suggestion-list > li {
+  display: block;
+}
+
+.idea-item {
+  display: table;
+  width: 100%;
+  /*line-height: 14px;*/
+  word-wrap: break-word;
+  position: relative;
+  border-bottom: 1px solid #eee;
+  padding: 1em 0;
+}
+
+.idea-item:hover {
+  background-color: #F5F5F5;
+}
+
+.idea-item > * {
+  display: table-cell;
+}
+
+.idea-item .cell:first-child {
+  width: 70px
+}
+
+.idea-item > .body {
+  word-wrap: break-word;
+  display: table-cell;
+}
+
+.idea-item > .idea-badge, .idea-item > .idea-badge2 {
+  display: table-cell;
+}
+
+.idea-item h2 {
+  font-size: 17px;
+  font-weight: bold;
+  line-height: 1.5em;
+  margin: 0;
+  display: inline-block;
+}
+
+.idea-item > .body .text {
+  font-size: 13px;
+  margin-bottom: 10px;
+  color: #292C33;
+  line-height: 1.4em;
+  margin: 10px 0;
+}
+
+.idea-item .meta {
+  color: #666F80;
+  font-size: 11px;
+}
+
+.idea-item .meta .separator {
+  margin: 0 .6em;
+}
+
+
+
+
+.vote-badge {
+  border: 1px solid #E5E5E5;
+  border-radius: 2px;
+  color: #757575;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 14px;
+  /*margin-bottom: 3px;*/
+  padding: 0;
+  text-align: center;
+  width: 40px;
+  margin-left: 10px;
+  position: relative;
+  cursor: pointer;
+}
+
+.vote-badge:hover {
+  border-color: #4285f4;
+  color: #4285f4;
+}
+
+.vote-badge.voted {
+  border-color: green;
+}
+
+.vote-badge.voted .vote {
+  background: green;
+  border-color: green;
+}
+
+.vote-badge.voted:hover {
+  border-color: red;
+  color: red;
+}
+
+.vote-badge.voted:hover .vote {
+  background: red;
+  border-color: red;
+}
+
+
+.vote-badge .plus {
+  display: none;
+}
+
+.vote-badge:hover .plus {
+  display: inline;
+}
+
+.vote-badge .vote-count {
+  line-height: 28px;
+}
+
+.vote-badge .vote {
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  border: 0;
+  background-color: #00F;
+  color:#fff;
+  font-size: 11px;
+  border: 0;
+  outline: none;
+  background: #4285f4;
+  border-radius: 0 0 2px 2px;
+  border-top: 1px solid #E5E5E5;
+  font-weight: normal;
+}
+
+.back-link {
+  font-size: 10pt;
+  margin-bottom: 20px;
+  position: relative;
+  display: inline-block;
+}
