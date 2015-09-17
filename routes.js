@@ -4,9 +4,9 @@ Router.configure({
 });
 
 Router.route('/', function () {
-  this.render('Ideaboard');
+  this.render('IndexPage');
 });
 
 Router.route('/suggestions/:_id', function () {
-  this.render('suggestionPage', {data: {_id: this.params._id}});
+  this.render('IdeaShowPage', {data: {_id: this.params._id}});
 });
