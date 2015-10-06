@@ -6,7 +6,9 @@
  */
 
 var cx = React.addons.classSet;
-var hostUrl = "localhost:3000"
+// var hostUrl = "localhost:3000"
+// Meteor.absoluteUrl.defaultOptions.rootUrl = "http://localhost.kithub.de:3000"
+
 const CATEGORIES = {
   0: "Allgemein",
   1: "Architektur",
@@ -21,7 +23,13 @@ const CATEGORIES = {
   10: "Physik",
   11: "Wirtschaftswissenschaften"
 };
-Ideas = new Meteor.Collection("ideas");
+
+Ideas = new Meteor.Collection("ideas", {
+  transform: function(doc) {
+    doc.ownerObj = Meteor.users.findOne(doc.owner);
+    return doc;
+  }
+});
 
 
 var FilterBar = ReactMeteor.createClass({
@@ -43,18 +51,6 @@ var FilterBar = ReactMeteor.createClass({
   }
 });
 
-
-
-function afterFbLoad(cb) {
-  if (typeof FB != "undefined") {
-    cb(FB)
-  } else {
-    window.fbAsyncInit = function() {
-      cb(FB)
-    };
-  }
-}
-
 if (Meteor.isClient) {
   // Accounts.ui.config({
   //   passwordSignupFields: "USERNAME_ONLY"
@@ -66,4 +62,23 @@ if (Meteor.isClient) {
   window.postAbsoluteUrl = function (id) {
     return Meteor.absoluteUrl()+postUrl(id);
   }
+
+
+  function afterFbLoad(cb) {
+    if (typeof FB != "undefined") {
+      cb(FB)
+    } else {
+      window.fbAsyncInit = function() {
+        cb(FB)
+      };
+    }
+  }
+
+  Router.onAfterAction(function() {
+    setTimeout(function() {
+      afterFbLoad(function() {
+        FB.XFBML.parse();
+      })
+    }, 0)
+  });
 }

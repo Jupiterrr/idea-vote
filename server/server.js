@@ -11,7 +11,8 @@ Meteor.startup(function () {
         createdAt: new Date(),
         title: title,
         description: "test",
-        votes: []
+        votes: [],
+        owner: "#"
       })
     })
   }

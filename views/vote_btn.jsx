@@ -37,7 +37,7 @@ VoteBtn = ReactMeteor.createClass({
         <span className="vote-count">{this.props.idea.votes.length}</span>
         <span className="plus">{unvote ? "-" : "+"}</span>
       </div>
-      <div className="vote">{unvote ? "unvote" : "vote"}</div>
+      <div className="vote">{unvote ? "Unvote" : "Vote"}</div>
     </div>)
   }
 });

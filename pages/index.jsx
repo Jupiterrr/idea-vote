@@ -11,7 +11,8 @@ IndexPage = ReactMeteor.createClass({
 
   getMeteorState: function() {
     return {
-      ideas: Ideas.find({}, {sort: {votes: -1}}).fetch()
+      ideas: Ideas.find({}, {sort: {votes: -1}}).fetch(),
+      authenticated: !!Meteor.userId()
     };
   },
 
@@ -21,7 +22,7 @@ IndexPage = ReactMeteor.createClass({
     });
     return (
       <div>
-        <IdeaForm />
+        <IdeaForm authenticated={this.state.authenticated}/>
         <ul className="suggestion-list">{items}</ul>
       </div>
     );

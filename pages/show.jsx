@@ -1,4 +1,5 @@
-var IdeaShowPage = ReactMeteor.createClass({
+
+IdeaShowPage = ReactMeteor.createClass({
 
   templateName: "IdeaShowPage",
 
@@ -8,23 +9,20 @@ var IdeaShowPage = ReactMeteor.createClass({
 
   getMeteorState: function() {
     var that = this;
+    var idea = Ideas.findOne({_id: that.props._id});
+    window.idea = idea;
+    if (!idea) return {};
+    var userID = Meteor.userId();
     return {
-      idea: Ideas.findOne({_id: that.props._id})
+      idea: idea,
+      authenticated: !!userID,
+      isOwner: userID && idea.owner == userID
     };
-  },
-
-  componentDidMount: function() {
-    console.log("mount", typeof FB != "undefined")
-    afterFbLoad(function(fb) {
-      setTimeout(function () {
-        console.log("load", fb)
-        FB.XFBML.parse();
-      }, 100);
-    })
   },
 
   handleDelete: function(e) {
     e.preventDefault();
+    if (!confirm("Are you sure you want to delete this suggestion?")) return;
     Meteor.call("delete", this.state.idea._id, function(err) {
       if (!err) Router.go("/");
     });
@@ -32,12 +30,15 @@ var IdeaShowPage = ReactMeteor.createClass({
 
   render: function() {
     if (!this.state.idea) return (<div></div>);
-    var owner = Meteor.userId() == this.state.idea.owner;
-    if (owner) var deleteLink = (<a className="back-link" href="javascript:;" onClick={this.handleDelete}>✕ Delete</a>);
+    if (this.state.isOwner) {
+      var deleteLink = (<span>
+      &nbsp;<span className="separator">·</span>&nbsp;
+      <a className="back-link" href="javascript:;" onClick={this.handleDelete}>✕ Delete</a>
+      </span>);
+    };
     return (
       <div>
         <a href="/" className="back-link">← Suggestions</a>
-        &nbsp;<span className="separator">·</span>&nbsp;
         {deleteLink}
         <IdeaPost idea={this.state.idea} />
         <div className="fb-comments" data-href={postAbsoluteUrl(this.state.idea._id)} data-numposts="10"></div>
