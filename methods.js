@@ -1,5 +1,8 @@
 Meteor.methods({
-  post: function(title, description) {
+  post: function(title, description, category) {
+    if (! Meteor.userId()) {
+      throw new Meteor.Error("not-authorized");
+    }
     if (! Meteor.userId()) {
       throw new Meteor.Error("not-authorized");
     }
@@ -10,7 +13,8 @@ Meteor.methods({
       title: title,
       description: description,
       votes: [],
-      owner: Meteor.userId()
+      owner: Meteor.userId(),
+      category: category
     });
   },
   vote: function(ideaId) {

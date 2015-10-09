@@ -31,13 +31,13 @@ VoteBtn = ReactMeteor.createClass({
     var classes = "vote-badge";
     classes += unvote ? " upvote" : " unvote";
     classes += unvote && " voted";
-
+    //<span className="plus">{unvote ? "-" : "+"}</span>
     return (<div className={classes} onClick={unvote ? this.handleUnvote : this.handleVote}>
       <div className="box">
         <span className="vote-count">{this.props.idea.votes.length}</span>
-        <span className="plus">{unvote ? "-" : "+"}</span>
       </div>
-      <div className="vote">{unvote ? "Unvote" : "Vote"}</div>
+      <div className="vote vote-up"><i className="fa fa-thumbs-up"></i></div>
+      <div className="vote vote-down"><i className="fa fa-thumbs-down"></i></div>
     </div>)
   }
 });

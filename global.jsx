@@ -9,7 +9,7 @@ var cx = React.addons.classSet;
 // var hostUrl = "localhost:3000"
 // Meteor.absoluteUrl.defaultOptions.rootUrl = "http://localhost.kithub.de:3000"
 
-const CATEGORIES = {
+CATEGORIES = {
   0: "Allgemein",
   1: "Architektur",
   2: "Bauingenieur-, Geo- und Umweltwissenschaften",
@@ -24,34 +24,18 @@ const CATEGORIES = {
   11: "Wirtschaftswissenschaften"
 };
 
+
+
 Ideas = new Meteor.Collection("ideas", {
   transform: function(doc) {
     doc.ownerObj = Meteor.users.findOne(doc.owner);
+    doc.categoryStr = CATEGORIES[doc.category];
     return doc;
   }
 });
 
-
-var FilterBar = ReactMeteor.createClass({
-
-  render: function() {
-    var options = [<option>--- Alle ---</option>];
-    // Object.keys(CATEGORIES).map(function(k) {
-    //   return (<option value={k}>{CATEGORIES[k]}</option>);
-    // });
-    return (<div className="filterbar">
-      <a href="#" className="filter-link">Hot</a>
-      <a href="#" className="filter-link">Top</a>
-      <a href="#" className="filter-link">New</a>
-      <select>
-        {options}
-      </select>
-      <a href="#" className="filter-link">My feedback</a>
-    </div>)
-  }
-});
-
 if (Meteor.isClient) {
+  window.CATEGORIES = CATEGORIES;
   // Accounts.ui.config({
   //   passwordSignupFields: "USERNAME_ONLY"
   // });
@@ -81,4 +65,29 @@ if (Meteor.isClient) {
       })
     }, 0)
   });
+
+  Accounts.ui.config({
+    requestPermissions: {
+       facebook: [],
+    }
+  });
+
+  var authenticated = !!Meteor.userId();
+  setInterval(function(){
+    var temp = !!Meteor.userId();
+    if (authenticated != temp) {
+      authenticated = !authenticated;
+      $(document).trigger("loginChange");
+    }
+  }, 200);
+
+  function replaceText() {
+    $('.sign-in-text-facebook').text('Mit Facebook anmelden');
+    $('#login-buttons-logout').text('Abmelden');
+  }
+
+  Template.ApplicationLayout.rendered = function() {
+    replaceText();
+    $(document).on("loginChange", replaceText);
+  };
 }

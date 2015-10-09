@@ -104,6 +104,10 @@ a:hover {
   font-size: 10pt;
 }
 
+.input-section .category-selector {
+  margin-bottom: 10px;
+}
+
 .input-section .fadein-area {
   display: none;
 }
@@ -238,6 +242,18 @@ ul.suggestion-list {
   border-color: red;
 }
 
+.vote-badge .vote.vote-down {
+  display: none;
+}
+
+.vote-badge.voted:hover .vote-up {
+  display: none;
+}
+
+.vote-badge.voted:hover .vote-down {
+  display: inherit;
+}
+
 
 .vote-badge .plus {
   display: none;
@@ -263,7 +279,7 @@ ul.suggestion-list {
   border: 0;
   outline: none;
   background: #4285f4;
-  border-radius: 0 0 2px 2px;
+  /*border-radius: 0 0 2px 2px;*/
   border-top: 1px solid #E5E5E5;
   font-weight: normal;
 }

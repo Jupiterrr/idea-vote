@@ -24,7 +24,9 @@ IdeaForm = ReactMeteor.createClass({
   handleSubmit: function(e) {
     var title = React.findDOMNode(this.refs.titleInput).value;
     var description = React.findDOMNode(this.refs.descriptionInput).value;
-    var x = Meteor.call("post", title, description, function(err, res) {
+    var category = React.findDOMNode(this.refs.categoryInput).value;
+
+    var x = Meteor.call("post", title, description, category, function(err, res) {
       if (!err) Router.go("/"+postUrl(res));
     });
     console.log("post", x);
@@ -43,8 +45,15 @@ IdeaForm = ReactMeteor.createClass({
     if (e) e.preventDefault();
   },
 
+  renderDropdown: function() {
+    var options = [<option value="0" key="_">--- Kategorie (optional) ---</option>];
+    Object.keys(window.CATEGORIES).forEach(function(k) {
+      options.push(<option value={k} key={k}>{window.CATEGORIES[k]}</option>);
+    });
+    return (<select ref="categoryInput" className="category-selector">{options}</select>);
+  },
+
   render: function() {
-    // return (<div>omg</div>)
     return this.props.authenticated ? this.renderAuthenticated() : this.renderUnauthenticated();
   },
 
@@ -52,7 +61,7 @@ IdeaForm = ReactMeteor.createClass({
     classes = "input-section";
     return (
       <div className={classes}>
-        Login to submit suggestions.
+        Melde dich an um Vorschläge einzureichen und abzustimmen.
       </div>
     );
   },
@@ -62,13 +71,14 @@ IdeaForm = ReactMeteor.createClass({
     if (this.state.active) classes += " active";
     return (
       <div className={classes}>
-        <h2>Please enter your suggestion...</h2>
+        <h2>Bitte gib deinen Vorschlag ein...</h2>
         <form onSubmit={this.handleSubmit} ref="form">
-          <input onFocus={this.handleActivate} ref="titleInput" className="new-idea-input" placeholder="Enter your idea here"/>
+          <input onFocus={this.handleActivate} ref="titleInput" className="new-idea-input" placeholder="Gib deinen Vorschlag hier ein"/>
           <div className="fadein-area">
-            <textarea placeholder="Additional description (optional)" ref="descriptionInput"/>
-            <input type="submit" value="Submit" />&nbsp;
-            <button type="reset" value="Reset" onClick={this.clear}>Cancel</button>
+            {this.renderDropdown()}
+            <textarea placeholder="Zusätzliche Beschreibung (optional)" ref="descriptionInput"/>
+            <input type="submit" value="Senden" />&nbsp;
+            <button type="reset" onClick={this.clear}>Abbrechen</button>
           </div>
         </form>
       </div>

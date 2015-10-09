@@ -1,3 +1,8 @@
+function pickCategory() {
+  var keys = Object.keys(CATEGORIES)
+  return keys[Math.floor(Math.random()*keys.length)]
+}
+
 Meteor.startup(function () {
   if (Ideas.find().count() === 0) {
     var names = ["Ada Lovelace",
@@ -12,7 +17,8 @@ Meteor.startup(function () {
         title: title,
         description: "test",
         votes: [],
-        owner: "#"
+        owner: "#",
+        category: pickCategory()
       })
     })
   }

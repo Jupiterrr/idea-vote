@@ -1,6 +1,12 @@
 IdeaPost = ReactMeteor.createClass({
+
+  propTypes: {
+    full: React.PropTypes.bool
+  },
+
   render: function() {
     var idea = this.props.idea;
+    if (this.props.full) var description = <p>{idea.description}</p>;
     return (
       <div className="idea-item">
         <div className="cell"><VoteBtn idea={idea} /></div>
@@ -9,11 +15,12 @@ IdeaPost = ReactMeteor.createClass({
           <div className="meta">
             <a href={"/suggestions/" + idea._id + "#comments"}>
               <span className="fb-comments-count" data-href={postAbsoluteUrl(idea._id)}>0</span>
-              &nbsp;comments
+              &nbsp;Kommentare
             </a>
             <span className="separator">·</span>
-            <span>Operating System</span>
+            <span>{idea.categoryStr}</span>
           </div>
+          {description}
         </div>
       </div>
     );

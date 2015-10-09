@@ -22,7 +22,7 @@ IdeaShowPage = ReactMeteor.createClass({
 
   handleDelete: function(e) {
     e.preventDefault();
-    if (!confirm("Are you sure you want to delete this suggestion?")) return;
+    if (!confirm("Bist du sicher, dass du den Vorschlag löschen möchtest?")) return;
     Meteor.call("delete", this.state.idea._id, function(err) {
       if (!err) Router.go("/");
     });
@@ -33,14 +33,14 @@ IdeaShowPage = ReactMeteor.createClass({
     if (this.state.isOwner) {
       var deleteLink = (<span>
       &nbsp;<span className="separator">·</span>&nbsp;
-      <a className="back-link" href="javascript:;" onClick={this.handleDelete}>✕ Delete</a>
+      <a className="back-link" href="javascript:;" onClick={this.handleDelete}>✕ Löschen</a>
       </span>);
     };
     return (
       <div>
-        <a href="/" className="back-link">← Suggestions</a>
+        <a href="/" className="back-link">← Vorschläge</a>
         {deleteLink}
-        <IdeaPost idea={this.state.idea} />
+        <IdeaPost idea={this.state.idea} full="true"/>
         <div className="fb-comments" data-href={postAbsoluteUrl(this.state.idea._id)} data-numposts="10"></div>
       </div>
     );
