@@ -18,9 +18,9 @@ IdeaPost = ReactMeteor.createClass({
               &nbsp;Kommentare
             </a>
             <span className="separator">·</span>
-            <span>{idea.categoryStr}</span>
+            <a href={"/?category="+idea.category}>{idea.categoryStr}</a>
           </div>
-          {description}
+          <div className="description">{description}</div>
         </div>
       </div>
     );

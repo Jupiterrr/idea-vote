@@ -68,6 +68,10 @@ a:hover {
   color: #4078C0;
 }
 
+.input-section.unauthenticated {
+  margin-bottom: 1em;
+}
+
 .input-section h2 {
   font-size: 18px;
   font-weight: bold;
@@ -116,6 +120,12 @@ a:hover {
   display: block;
 }
 
+.input-section .ideaform-seperator {
+  border: 0;
+  border-bottom: 1px solid #eee;
+  padding-bottom: .5em;
+}
+
 .filterbar {
   margin-bottom: 10px;
 }
@@ -130,6 +140,11 @@ a:hover {
   border: 1px solid #e0e0e0;
   border-radius: 4px;
   padding: .2em .5em;
+}
+
+.filter-link.active {
+  background-color: #e0e0e0;
+  color: white;
 }
 
 
@@ -153,7 +168,7 @@ ul.suggestion-list {
   padding: 1em 0;
 }
 
-.idea-item:hover {
+.index-page .idea-item:hover {
   background-color: #F5F5F5;
 }
 
@@ -199,6 +214,9 @@ ul.suggestion-list {
   margin: 0 .6em;
 }
 
+.idea-item .description {
+  white-space: pre;
+}
 
 
 
@@ -266,6 +284,10 @@ ul.suggestion-list {
 .vote-badge .vote-count {
   line-height: 28px;
 }
+.vote-badge.voted .vote-count {
+  text-decoration: underline;
+}
+
 
 .vote-badge .vote {
   cursor: pointer;

@@ -24,6 +24,9 @@ CATEGORIES = {
   11: "Wirtschaftswissenschaften"
 };
 
+CATEGORIES_V2 = Object.keys(CATEGORIES).map(function (k) { return {id: k.toString(), title: CATEGORIES[k]} });
+FILTER_CATEGORIES = CATEGORIES_V2.slice();
+FILTER_CATEGORIES.unshift({id: "", title: "- Alle Kategorien"});
 
 
 Ideas = new Meteor.Collection("ideas", {
@@ -62,6 +65,7 @@ if (Meteor.isClient) {
     setTimeout(function() {
       afterFbLoad(function() {
         FB.XFBML.parse();
+        console.log("FB.XFBML.parse()")
       })
     }, 0)
   });

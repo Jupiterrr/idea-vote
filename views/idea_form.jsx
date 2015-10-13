@@ -12,13 +12,17 @@ IdeaForm = ReactMeteor.createClass({
 
   componentDidMount: function() {
     var that = this;
-    $(React.findDOMNode(this.refs.form)).on('keyup.unique_name', function(e) {
+    $(React.findDOMNode(this.refs.form)).on('keyup.form-escape', function(e) {
       if (e.keyCode == 27) that.clear()
     })
+    // $(document).on( "click.form-escape", ".vote-badge", function() {
+    //   that.clear()
+    // });
   },
 
   componentWillUnmount: function() {
     $(React.findDOMNode(this.refs.form)).off(".form-escape");
+    // $(".vote-badge").off(".form-escape");;
   },
 
   handleSubmit: function(e) {
@@ -27,7 +31,11 @@ IdeaForm = ReactMeteor.createClass({
     var category = React.findDOMNode(this.refs.categoryInput).value;
 
     var x = Meteor.call("post", title, description, category, function(err, res) {
-      if (!err) Router.go("/"+postUrl(res));
+      if (err) {
+        alert(err.reason);
+      } else {
+        Router.go("/"+postUrl(res));
+      }
     });
     console.log("post", x);
     window.x = x;
@@ -58,7 +66,7 @@ IdeaForm = ReactMeteor.createClass({
   },
 
   renderUnauthenticated: function() {
-    classes = "input-section";
+    classes = "input-section unauthenticated";
     return (
       <div className={classes}>
         Melde dich an um Vorschläge einzureichen und abzustimmen.
@@ -79,6 +87,7 @@ IdeaForm = ReactMeteor.createClass({
             <textarea placeholder="Zusätzliche Beschreibung (optional)" ref="descriptionInput"/>
             <input type="submit" value="Senden" />&nbsp;
             <button type="reset" onClick={this.clear}>Abbrechen</button>
+            <hr className="ideaform-seperator"/>
           </div>
         </form>
       </div>

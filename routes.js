@@ -5,7 +5,7 @@ Router.configure({
 
 Router.route('/', function () {
   console.log("hit")
-  this.render('IndexPage', {data: {query: this.params.query}});
+  this.render('IndexPage', {data: {}});
 });
 
 Router.route('/suggestions/:_id', function () {
