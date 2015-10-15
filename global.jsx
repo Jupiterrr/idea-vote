@@ -31,7 +31,16 @@ FILTER_CATEGORIES.unshift({id: "", title: "- Alle Kategorien"});
 
 Ideas = new Meteor.Collection("ideas", {
   transform: function(doc) {
-    doc.ownerObj = Meteor.users.findOne(doc.owner);
+    var owner = Meteor.users.findOne(doc.owner);
+    if (owner) {
+      doc.ownerObj = {
+        name: owner.profile.name,
+        fbLink: owner.services.facebook.link,
+        profilePicture: "http://graph.facebook.com/"+owner.services.facebook.id+"/picture?type=square"
+      }
+    } else {
+      doc.ownerObj = null;
+    }
     doc.categoryStr = CATEGORIES[doc.category];
     return doc;
   }

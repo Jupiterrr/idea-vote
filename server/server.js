@@ -25,5 +25,26 @@ Meteor.startup(function () {
 });
 
 Meteor.publish("ideas", function() {
-  return Ideas.find();
+  return [
+    Ideas.find(),
+    Meteor.users.find({}, {fields: {
+      'profile': 1,
+      'services.facebook.link': 1,
+      'services.facebook.id': 1
+    }})
+  ];
+});
+
+Meteor.publish("userData", function() {
+  return Meteor.users.find({}, {fields: {
+    'profile': 1,
+    'services.facebook.link': 1,
+    'services.facebook.id': 1
+  }})
+});
+
+Meteor.users.deny({
+  update: function() {
+    return true;
+  }
 });

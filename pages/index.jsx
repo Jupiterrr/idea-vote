@@ -7,7 +7,7 @@ IndexPage = ReactMeteor.createClass({
   },
 
   componentDidMount: function() {
-    console.log("componentDidMount")
+    // console.log("componentDidMount")
     var that = this;
     $(document).on("query-change", function() {
       that.setState(that.getMeteorState())
@@ -15,7 +15,7 @@ IndexPage = ReactMeteor.createClass({
   },
 
   getMeteorState: function() {
-    console.log("getMeteorState")
+    // console.log("getMeteorState")
     IdeasStore.initialize();
     IdeasStore.fetch();
 

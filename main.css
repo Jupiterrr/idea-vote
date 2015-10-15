@@ -218,7 +218,15 @@ ul.suggestion-list {
   white-space: pre;
 }
 
+.idea-item .fa-external-link {
+  font-size: .85em;
+}
 
+.profile-picture {
+  vertical-align: middle;
+  background-color: #fff;
+  border-radius: 2px;
+}
 
 .vote-badge {
   border: 1px solid #E5E5E5;
@@ -234,6 +242,8 @@ ul.suggestion-list {
   margin-left: 10px;
   position: relative;
   cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .vote-badge:hover {

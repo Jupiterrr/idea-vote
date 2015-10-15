@@ -7,6 +7,13 @@ IdeaPost = ReactMeteor.createClass({
   render: function() {
     var idea = this.props.idea;
     if (this.props.full) var description = <p>{idea.description}</p>;
+    if (idea.ownerObj) var ownerLink = (
+      <span>
+        <span className="separator">·</span>
+        <img className="profile-picture" src={idea.ownerObj.profilePicture} width="16" height="16" />
+        &nbsp;{idea.ownerObj.name}
+      </span>
+    )
     return (
       <div className="idea-item">
         <div className="cell"><VoteBtn idea={idea} /></div>
@@ -19,6 +26,7 @@ IdeaPost = ReactMeteor.createClass({
             </a>
             <span className="separator">·</span>
             <a href={"/?category="+idea.category}>{idea.categoryStr}</a>
+            {ownerLink}
           </div>
           <div className="description">{description}</div>
         </div>
