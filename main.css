@@ -322,3 +322,41 @@ ul.suggestion-list {
   position: relative;
   display: inline-block;
 }
+
+.login-btn {
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  padding: 4px 8px;
+  font-size: 80%;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  text-align: center;
+  color: #fff;
+  background: #596595;
+  border: 1px solid #464f75;
+  border-radius: 4px;
+  display: inline-block;
+  position: relative;
+}
+
+.login-btn:hover {
+  background: #7580ac;
+}
+
+.login-btn .fb-login-image {
+  display: inline-block;
+  position: absolute;
+  left: 6px;
+  top: 6px;
+  width: 16px;
+  height: 16px;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAq0lEQVQ4jWP8//8/AyWAhYGBgcEmauYZBgYGYxL1nj2yLN2ECcohVTNcDwsxKlXlhRm6yzwZRAS5GRgYGBhsombC5ZhwaUIGyJrRAVEuwGYzSS7AB/C64MiydKx8ZJfgNeDN+68MDAwIL8D4RLsgIHsJis0wPjKgOAyoE4hcnGwMGkpiBBUbacvA2TfuvaKiC759/3X23NUnOPMDtgTEwMBwloGBgYGR0uwMAGOPLJS9mkQHAAAAAElFTkSuQmCC);
+}
+
+.login-btn .text-besides-image {
+  margin-left: 18px;
+}

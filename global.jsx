@@ -85,22 +85,16 @@ if (Meteor.isClient) {
     }
   });
 
-  var authenticated = !!Meteor.userId();
-  setInterval(function(){
-    var temp = !!Meteor.userId();
-    if (authenticated != temp) {
-      authenticated = !authenticated;
-      $(document).trigger("loginChange");
-    }
-  }, 200);
+  // var authenticated = !!Meteor.userId();
+  // setInterval(function(){
+  //   var temp = !!Meteor.userId();
+  //   if (authenticated != temp) {
+  //     authenticated = !authenticated;
+  //     $(document).trigger("loginChange");
+  //   }
+  // }, 200);
 
-  function replaceText() {
-    $('.sign-in-text-facebook').text('Mit Facebook anmelden');
-    $('#login-buttons-logout').text('Abmelden');
-  }
-
-  Template.ApplicationLayout.rendered = function() {
-    replaceText();
-    $(document).on("loginChange", replaceText);
-  };
+  // Template.ApplicationLayout.rendered = function() {
+  //   $(document).on("loginChange", replaceText);
+  // };
 }
