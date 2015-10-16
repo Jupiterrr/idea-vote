@@ -9,6 +9,8 @@ var cx = React.addons.classSet;
 // var hostUrl = "localhost:3000"
 // Meteor.absoluteUrl.defaultOptions.rootUrl = "http://localhost.kithub.de:3000"
 
+ADMINS = ["10204716619573865", "10204920049459485"]
+
 CATEGORIES = {
   0: "Allgemein",
   1: "Architektur",
@@ -28,6 +30,10 @@ CATEGORIES_V2 = Object.keys(CATEGORIES).map(function (k) { return {id: k.toStrin
 FILTER_CATEGORIES = CATEGORIES_V2.slice();
 FILTER_CATEGORIES.unshift({id: "", title: "- Alle Kategorien"});
 
+isAdmin = function() {
+  var user = Meteor.user();
+  return user && ADMINS.indexOf(user.services.facebook.id) >= 0;
+}
 
 Ideas = new Meteor.Collection("ideas", {
   transform: function(doc) {

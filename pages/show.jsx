@@ -15,8 +15,7 @@ IdeaShowPage = ReactMeteor.createClass({
     var userID = Meteor.userId();
     return {
       idea: idea,
-      authenticated: !!userID,
-      isOwner: userID && idea.owner == userID
+      authenticated: !!userID
     };
   },
 
@@ -30,7 +29,7 @@ IdeaShowPage = ReactMeteor.createClass({
 
   render: function() {
     if (!this.state.idea) return (<div></div>);
-    if (this.state.isOwner) {
+    if ( canDeleteIdea(this.state.idea) ) {
       var deleteLink = (<span>
       &nbsp;<span className="separator">·</span>&nbsp;
       <a className="back-link" href="javascript:;" onClick={this.handleDelete}>✕ Löschen</a>

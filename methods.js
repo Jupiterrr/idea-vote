@@ -1,3 +1,4 @@
+
 Meteor.methods({
   post: function(title, description, category) {
     if (! Meteor.userId()) {
@@ -36,13 +37,24 @@ Meteor.methods({
     Ideas.update(ideaId, { $pull: {votes: Meteor.userId()} });
   },
   delete: function(ideaId) {
-    if (! Meteor.userId()) {
-      throw new Meteor.Error("not-authorized");
-    }
     var idea = Ideas.findOne(ideaId);
-    if (idea.owner != Meteor.userId()) {
-      throw new Meteor.Error("not-authorized");
-    }
+    if (! canDeleteIdea(idea)) throw new Meteor.Error("not-authorized");
     Ideas.remove(ideaId);
   }
 });
+
+canDeleteIdea = function(idea) {
+  var user = Meteor.userId();
+  if (!user) return false;
+
+  var isOwner = function() { return idea.owner == user }
+  // return user && (isAdmin() || isOwner())
+  return isAdmin() || (isOwner() && ideaAgeInMin(idea) <= 60)
+}
+
+canEditIdea = canDeleteIdea;
+
+// age in minutes
+function ideaAgeInMin(idea) {
+  return Math.floor((Date.now() - idea.createdAt) / (1000 * 60))
+}
