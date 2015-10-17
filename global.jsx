@@ -38,7 +38,7 @@ isAdmin = function() {
 Ideas = new Meteor.Collection("ideas", {
   transform: function(doc) {
     var owner = Meteor.users.findOne(doc.owner);
-    if (owner) {
+    if (owner && owner.services) {
       doc.ownerObj = {
         name: owner.profile.name,
         fbLink: owner.services.facebook.link,

@@ -6,7 +6,7 @@ IdeaPost = ReactMeteor.createClass({
 
   render: function() {
     var idea = this.props.idea;
-    if (this.props.full) var description = <p>{idea.description}</p>;
+    if (this.props.full) var description = <div className="description markdown" dangerouslySetInnerHTML={{__html: marked(idea.description, {sanitize: true})}} />;
     if (idea.ownerObj) var ownerLink = (
       <span>
         <span className="separator">·</span>
@@ -28,7 +28,7 @@ IdeaPost = ReactMeteor.createClass({
             <a href={"/?category="+idea.category}>{idea.categoryStr}</a>
             {ownerLink}
           </div>
-          <div className="description">{description}</div>
+          {description}
         </div>
       </div>
     );

@@ -6,7 +6,8 @@ IdeaForm = ReactMeteor.createClass({
 
   getInitialState: function() {
     return {
-      active: false
+      active: false,
+      description: ""
     };
   },
 
@@ -18,6 +19,7 @@ IdeaForm = ReactMeteor.createClass({
     // $(document).on( "click.form-escape", ".vote-badge", function() {
     //   that.clear()
     // });
+    $(".input-section textarea").autogrow({animate: false});
   },
 
   componentWillUnmount: function() {
@@ -44,6 +46,7 @@ IdeaForm = ReactMeteor.createClass({
 
   handleActivate: function() {
     this.setState({active: true});
+    // $(React.findDOMNode(this.refs.descriptionInput)).autogrow();
   },
 
   clear: function(e) {
@@ -51,6 +54,11 @@ IdeaForm = ReactMeteor.createClass({
     React.findDOMNode(this.refs.form).reset();
     $(":focus").blur();
     if (e) e.preventDefault();
+  },
+
+  handleDescriptionChange: function() {
+    var textarea = React.findDOMNode(this.refs.descriptionInput);
+    this.setState({description: textarea.value});
   },
 
   renderDropdown: function() {
@@ -77,6 +85,14 @@ IdeaForm = ReactMeteor.createClass({
   renderAuthenticated: function() {
     classes = "input-section";
     if (this.state.active) classes += " active";
+    console.log("this.state.description", this.state.description)
+    if (this.state.description.length > 0) {
+      var preview = (<div className="preview-section">
+        <h5>Vorschau:</h5>
+        <div className="markdown preview"dangerouslySetInnerHTML={{__html: marked(this.state.description, {sanitize: true})}}/>
+      </div>)
+    }
+
     return (
       <div className={classes}>
         <h2>Bitte gib deinen Vorschlag ein...</h2>
@@ -84,8 +100,10 @@ IdeaForm = ReactMeteor.createClass({
           <input onFocus={this.handleActivate} ref="titleInput" className="new-idea-input" placeholder="Gib deinen Vorschlag hier ein"/>
           <div className="fadein-area">
             {this.renderDropdown()}
-            <textarea placeholder="Zusätzliche Beschreibung (optional)" ref="descriptionInput"/>
-            <input type="submit" value="Senden" />&nbsp;
+            <textarea placeholder="Zusätzliche Beschreibung (optional)" ref="descriptionInput" value={this.state.description} onChange={this.handleDescriptionChange}/>
+            <small className="description-md-hint">Du kannst deinen Text mit <a href="https://guides.github.com/features/mastering-markdown/#syntax" target="_blank">Markdown</a> formatieren.</small>
+            {preview}
+            <input type="submit" value="Vorschlag abschicken" />&nbsp;
             <button type="reset" onClick={this.clear}>Abbrechen</button>
             <hr className="ideaform-seperator"/>
           </div>

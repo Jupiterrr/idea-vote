@@ -11,6 +11,10 @@ body {
     margin: 0 auto;
 }
 
+.markdown img {
+  max-width: 100%;
+}
+
 .player {
     cursor: pointer;
     padding: 5px;
@@ -106,6 +110,17 @@ a:hover {
 
 .input-section textarea {
   font-size: 10pt;
+  margin-bottom: 0;
+}
+
+.input-section .description-md-hint {
+  display: block;
+  margin-bottom: 9px;
+  padding: 3px 10px;
+}
+
+.input-section .description-md-hint a {
+  text-decoration: underline;
 }
 
 .input-section .category-selector {
@@ -124,6 +139,31 @@ a:hover {
   border: 0;
   border-bottom: 1px solid #eee;
   padding-bottom: .5em;
+}
+
+.input-section textarea {
+  resize: both;
+}
+
+.input-section .preview-section h5 {
+  padding: 9px;
+  margin: 0;
+}
+
+.input-section .preview-section .preview {
+  background: #eee;
+  border: 0;
+  padding: 9px;
+  border-radius: 2px;
+  margin-bottom: 10px;
+}
+
+.input-section .preview-section .preview :first-child {
+  margin-top: 0;
+}
+
+.input-section .preview-section .preview :last-child {
+  margin-bottom: 0;
 }
 
 .filterbar {
@@ -159,34 +199,25 @@ ul.suggestion-list {
 }
 
 .idea-item {
-  display: table;
-  width: 100%;
   /*line-height: 14px;*/
   word-wrap: break-word;
   position: relative;
   border-bottom: 1px solid #eee;
   padding: 1em 0;
+  display: flex;
 }
 
 .index-page .idea-item:hover {
   background-color: #F5F5F5;
 }
 
-.idea-item > * {
-  display: table-cell;
-}
-
 .idea-item .cell:first-child {
-  width: 90px
+  width: 90px;
 }
 
 .idea-item > .body {
   word-wrap: break-word;
-  display: table-cell;
-}
-
-.idea-item > .idea-badge, .idea-item > .idea-badge2 {
-  display: table-cell;
+  flex: 1;
 }
 
 .idea-item h2 {
@@ -215,7 +246,7 @@ ul.suggestion-list {
 }
 
 .idea-item .description {
-  white-space: pre;
+
 }
 
 .idea-item .fa-external-link {
