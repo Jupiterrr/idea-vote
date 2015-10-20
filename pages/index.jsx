@@ -27,6 +27,7 @@ IndexPage = ReactMeteor.createClass({
   },
 
   render: function() {
+    parseXFBML();
     // console.log("render list")
     if (this.state.ideas.length) {
       var items = this.state.ideas.map((idea) => {
@@ -37,6 +38,7 @@ IndexPage = ReactMeteor.createClass({
     }
     return (
       <div className="index-page">
+        <h1>Vorschläge für ein besseres <span style={{color: "#009E82"}}>KIT</span></h1>
         <IdeaForm authenticated={this.state.authenticated}/>
         <FilterBar filter={this.state.filter}/>
         <ul className="suggestion-list">{items}</ul>

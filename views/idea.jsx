@@ -14,9 +14,19 @@ IdeaPost = ReactMeteor.createClass({
         &nbsp;{idea.ownerObj.name}
       </span>
     )
+    if (isAdmin()) {
+      var voters = idea.voters.map(function(user) {
+        var profile = user.profile;
+        return <img className="profile-picture" src={profile.picture} title={profile.name} key={user._id} width="16" height="16" />
+      })
+    }
+
     return (
       <div className="idea-item">
-        <div className="cell"><VoteBtn idea={idea} /></div>
+        <div className="cell">
+          <VoteBtn idea={idea} />
+          <div className="voters">{voters}</div>
+        </div>
         <div className="body">
           <a href={"/suggestions/" + idea._id}><h2>{idea.title}</h2></a>
           <div className="meta">

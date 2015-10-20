@@ -27,6 +27,19 @@ IdeaShowPage = ReactMeteor.createClass({
     });
   },
 
+  parseXFBML: function() {
+    if (!this.state.idea || this._XFBMLRendered) return;
+    parseXFBML();
+    this._XFBMLRendered = true;
+  },
+
+  componentDidUpdate: function() {
+    this.parseXFBML();
+  },
+  componentDidMount: function() {
+    this.parseXFBML()
+  },
+
   render: function() {
     if (!this.state.idea) return (<div></div>);
     if ( canDeleteIdea(this.state.idea) ) {

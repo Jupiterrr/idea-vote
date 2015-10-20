@@ -1,14 +1,19 @@
 body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    /*font-family:arial,sans-serif;*/
-    font-weight: 200;
-    margin: 50px 0;
-    padding: 0;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  /*font-family:arial,sans-serif;*/
+  font-weight: 200;
+  margin: 50px 0;
+  padding: 0;
 }
 
 #outer {
-    width: 600px;
-    margin: 0 auto;
+  width: 600px;
+  margin: 0 auto;
+}
+
+h1 {
+  font-size: 20pt;
+  margin: 0 0 1em 0;
 }
 
 .markdown img {
@@ -257,6 +262,16 @@ ul.suggestion-list {
   vertical-align: middle;
   background-color: #fff;
   border-radius: 2px;
+}
+
+.voters {
+  width: 64px;
+  margin-left: 10px;
+  text-align: center;
+}
+
+.voters .profile-picture {
+  margin-right: 4px;
 }
 
 .vote-badge {

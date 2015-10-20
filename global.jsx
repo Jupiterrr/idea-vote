@@ -32,7 +32,7 @@ FILTER_CATEGORIES.unshift({id: "", title: "- Alle Kategorien"});
 
 isAdmin = function() {
   var user = Meteor.user();
-  return user && ADMINS.indexOf(user.services.facebook.id) >= 0;
+  return user && user.services && ADMINS.indexOf(user.services.facebook.id) >= 0;
 }
 
 Ideas = new Meteor.Collection("ideas", {
@@ -47,10 +47,19 @@ Ideas = new Meteor.Collection("ideas", {
     } else {
       doc.ownerObj = null;
     }
+    doc.voters = Meteor.users.find({_id: {$in: doc.votes}}).fetch();
     doc.categoryStr = CATEGORIES[doc.category];
     return doc;
   }
 });
+
+Meteor.users._transform = function(doc) {
+  if (doc.services) {
+    doc.profile.picture = "http://graph.facebook.com/"+doc.services.facebook.id+"/picture?type=square"
+  }
+  return doc;
+}
+
 
 if (Meteor.isClient) {
   window.CATEGORIES = CATEGORIES;
@@ -66,7 +75,7 @@ if (Meteor.isClient) {
   }
 
 
-  function afterFbLoad(cb) {
+  afterFbLoad = function(cb) {
     if (typeof FB != "undefined") {
       cb(FB)
     } else {
@@ -76,13 +85,22 @@ if (Meteor.isClient) {
     }
   }
 
-  Router.onAfterAction(function() {
+  parseXFBML = function() {
     setTimeout(function() {
       afterFbLoad(function() {
         FB.XFBML.parse();
         console.log("FB.XFBML.parse()")
       })
-    }, 0)
+    }, 0);
+  }
+
+  Router.onAfterAction(function() {
+    // setTimeout(function() {
+    //   afterFbLoad(function() {
+    //     FB.XFBML.parse();
+    //     console.log("FB.XFBML.parse()")
+    //   })
+    // }, 0)
   });
 
   Accounts.ui.config({
