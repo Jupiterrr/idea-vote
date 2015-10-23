@@ -47,6 +47,7 @@ Ideas = new Meteor.Collection("ideas", {
     } else {
       doc.ownerObj = null;
     }
+    if (!doc.votes) doc.votes = []
     doc.voters = Meteor.users.find({_id: {$in: doc.votes}}).fetch();
     doc.categoryStr = CATEGORIES[doc.category];
     return doc;

@@ -24,6 +24,12 @@ Meteor.methods({
       category: category
     });
   },
+  update: function(ideaId, data) {
+    var idea = Ideas.findOne(ideaId);
+    if (! canEditIdea(idea)) throw new Meteor.Error("not-authorized");
+    var whitelistedData = _.pick(data, 'title', 'description', 'category');
+    Ideas.update(ideaId, whitelistedData);
+  },
   vote: function(ideaId) {
     if (! Meteor.userId()) {
       throw new Meteor.Error("not-authorized");

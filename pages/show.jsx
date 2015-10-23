@@ -48,10 +48,17 @@ IdeaShowPage = ReactMeteor.createClass({
       <a className="back-link" href="javascript:;" onClick={this.handleDelete}>✕ Löschen</a>
       </span>);
     };
+    if ( canEditIdea(this.state.idea) ) {
+      var editLink = (<span>
+      &nbsp;<span className="separator">·</span>&nbsp;
+      <a className="back-link" href={suggestionEditUrl(this.state.idea)}>Bearbeiten</a>
+      </span>);
+    };
     return (
       <div>
         <a href="/" className="back-link">← Vorschläge</a>
         {deleteLink}
+        {editLink}
         <IdeaPost idea={this.state.idea} full={true}/>
         <div className="fb-comments" data-href={postAbsoluteUrl(this.state.idea._id)} data-numposts="10" data-width="100%"></div>
       </div>
