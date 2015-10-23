@@ -7,7 +7,7 @@ body {
 }
 
 #outer, body > footer {
-  width: 600px;
+  max-width: 600px;
   margin: 0 auto;
 }
 
@@ -32,54 +32,6 @@ h1 {
   top: 1em;
   right: 1em;
 }
-
-.player {
-    cursor: pointer;
-    padding: 5px;
-}
-
-.player .name {
-    display: inline-block;
-    width: 300px;
-    font-size: 1.75em;
-}
-
-.player .score {
-    display: inline-block;
-    width: 100px;
-    text-align: right;
-    font-size: 2em;
-    font-weight: bold;
-    color: #777;
-}
-
-.player.selected {
-    background-color: yellow;
-}
-
-.player.selected .score {
-    color: black;
-}
-
-.details, .none {
-    font-weight: bold;
-    font-size: 2em;
-    border-style: dashed none none none;
-    border-color: #ccc;
-    border-width: 4px;
-    margin: 50px 10px;
-    padding: 10px 0px;
-}
-
-.none {
-    color: #777;
-}
-
-.inc {
-  cursor: pointer;
-}
-
-
 
 .meta a,
 body > footer a,
@@ -423,4 +375,8 @@ ul.suggestion-list {
 
 .login-btn .text-besides-image {
   margin-left: 18px;
+}
+
+.padded, .nav-links {
+  padding: 0 10px
 }
