@@ -19,12 +19,18 @@ body > footer {
 }
 
 h1 {
-  font-size: 20pt;
-  margin: 0 0 1em 0;
+  font-size: 18pt;
+  margin: 0 0 2em 0;
 }
 
 .markdown img {
   max-width: 100%;
+}
+
+.login {
+  position: absolute;
+  top: 1em;
+  right: 1em;
 }
 
 .player {
@@ -75,7 +81,12 @@ h1 {
 
 
 
-a {
+.meta a,
+body > footer a,
+.title,
+.nav-links a,
+.filterbar a,
+.ar {
   text-decoration: none;
   color: inherit;
 }

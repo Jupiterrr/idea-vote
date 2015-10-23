@@ -77,7 +77,7 @@ IdeaForm = ReactMeteor.createClass({
     classes = "input-section unauthenticated";
     return (
       <div className={classes}>
-        Melde dich an um Vorschläge einzureichen und abzustimmen.
+        <a onClick={Meteor.loginWithFacebook} href="javascript:;">Melde dich an</a> um Vorschläge einzureichen und abzustimmen.
       </div>
     );
   },

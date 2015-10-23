@@ -56,9 +56,11 @@ IdeaShowPage = ReactMeteor.createClass({
     };
     return (
       <div>
-        <a href="/" className="back-link">← Vorschläge</a>
-        {deleteLink}
-        {editLink}
+        <div className="nav-links">
+          <a href="/" className="back-link">← Vorschläge</a>
+          {deleteLink}
+          {editLink}
+        </div>
         <IdeaPost idea={this.state.idea} full={true}/>
         <div className="fb-comments" data-href={postAbsoluteUrl(this.state.idea._id)} data-numposts="10" data-width="100%"></div>
       </div>

@@ -28,7 +28,7 @@ IdeaPost = ReactMeteor.createClass({
           <div className="voters">{voters}</div>
         </div>
         <div className="body">
-          <a href={"/suggestions/" + idea._id}><h2>{idea.title}</h2></a>
+          <a href={"/suggestions/" + idea._id} className="title"><h2>{idea.title}</h2></a>
           <div className="meta">
             <a href={"/suggestions/" + idea._id + "#comments"}>
               <span className="fb-comments-count" data-href={postAbsoluteUrl(idea._id)}>0</span>
