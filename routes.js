@@ -20,6 +20,14 @@ suggestionUrl = function(idea) {
   return "/suggestions/"+idea._id;
 }
 
+Router.route('/admin', {
+  onBefore: function() { if (isAdmin()) this.next(); },
+  action: function () {
+    this.render('AdminPage', {data: {}});
+  }
+});
+
+
 suggestionEditUrl = function(idea) {
   return suggestionUrl(idea) + "/edit"
 }
