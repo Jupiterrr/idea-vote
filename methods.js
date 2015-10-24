@@ -28,7 +28,7 @@ Meteor.methods({
     var idea = Ideas.findOne(ideaId);
     if (! canEditIdea(idea)) throw new Meteor.Error("not-authorized");
     var whitelistedData = _.pick(data, 'title', 'description', 'category');
-    Ideas.update(ideaId, whitelistedData);
+    Ideas.update(ideaId, {$set: whitelistedData});
   },
   vote: function(ideaId) {
     if (! Meteor.userId()) {
@@ -54,11 +54,16 @@ canDeleteIdea = function(idea) {
   if (!user) return false;
 
   var isOwner = function() { return idea.owner == user }
-  // return user && (isAdmin() || isOwner())
   return isAdmin() || (isOwner() && ideaAgeInMin(idea) <= 60)
 }
 
-canEditIdea = canDeleteIdea;
+canEditIdea = function(idea) {
+  var user = Meteor.userId();
+  if (!user) return false;
+
+  var isOwner = function() { return idea.owner == user }
+  return isAdmin() || isOwner();
+}
 
 // age in minutes
 function ideaAgeInMin(idea) {
