@@ -3,7 +3,7 @@ IndexPage = ReactMeteor.createClass({
   templateName: "IndexPage",
 
   startMeteorSubscriptions: function() {
-    Meteor.subscribe("ideas");
+    // Meteor.subscribe("ideas");
   },
 
   componentDidMount: function() {

@@ -3,13 +3,22 @@ Router.configure({
   layoutTemplate: 'ApplicationLayout'
 });
 
-Router.route('/', function () {
-  console.log("hit")
-  this.render('IndexPage', {data: {}});
+Router.route('/', {
+  waitOn: function() {
+    return [Meteor.subscribe("userData"), Meteor.subscribe("ideas")];
+  },
+  action: function () {
+    this.render('IndexPage', {data: {}});
+  }
 });
 
-Router.route('/suggestions/:_id', function () {
-  this.render('IdeaShowPage', {data: {_id: this.params._id}});
+Router.route('/suggestions/:_id', {
+  waitOn: function() {
+    return [Meteor.subscribe("userData"), Meteor.subscribe("ideas")];
+  },
+  action: function () {
+    this.render('IdeaShowPage', {data: {_id: this.params._id}});
+  }
 });
 
 Router.route('/suggestions/:_id/edit', function () {
@@ -21,7 +30,12 @@ suggestionUrl = function(idea) {
 }
 
 Router.route('/admin', {
-  onBefore: function() { if (isAdmin()) this.next(); },
+  waitOn: function() {
+    return Meteor.subscribe("userData");
+  },
+  before: function() {
+    if (isAdmin()) this.next();
+  },
   action: function () {
     this.render('AdminPage', {data: {}});
   }
@@ -31,3 +45,8 @@ Router.route('/admin', {
 suggestionEditUrl = function(idea) {
   return suggestionUrl(idea) + "/edit"
 }
+
+// console.log("...", Meteor.settings.facebook.appId, Meteor.settings.facebook.secret, !!(Meteor.settings &&
+//       Meteor.settings.facebook &&
+//       Meteor.settings.facebook.appId &&
+//       Meteor.settings.facebook.secret))

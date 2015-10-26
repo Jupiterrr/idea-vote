@@ -4,7 +4,7 @@ IdeaShowPage = ReactMeteor.createClass({
   templateName: "IdeaShowPage",
 
   startMeteorSubscriptions: function() {
-    Meteor.subscribe("ideas");
+    // Meteor.subscribe("ideas");
   },
 
   getMeteorState: function() {
